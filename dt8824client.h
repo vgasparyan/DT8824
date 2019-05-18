@@ -4,6 +4,10 @@
 #include <QObject>
 #include <QTcpSocket>
 #include <QMutex>
+#include <memory>
+
+///Forward declarations
+class FetchRecord;
 
 //error codes returned from set configuration operations
 enum DeviceError {
@@ -67,6 +71,8 @@ public:
     bool isAdActive();
     DeviceError adArmTrigger();
     DeviceError abort();
+
+    const FetchRecord* adFetch(uint32_t index, int numScan, GAIN gain);
 
 signals:
 

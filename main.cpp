@@ -1,5 +1,6 @@
 #include <QCoreApplication>
 #include "dt8824client.h"
+#include "fetch_record.h"
 
 int main(int argc, char *argv[])
 {
@@ -23,6 +24,11 @@ int main(int argc, char *argv[])
     qInfo() << "DT8824 channel  : " << r;
 
     dt8824.setAinEnable(1,1);
+
+    //Fetch sample from ADC
+    const FetchRecord* rec = dt8824.adFetch(0, 1, GAIN::GAIN_1);
+    qInfo() << "Scan count : " << rec->getScanCount();
+    qInfo() << "Scan index : " << rec->getScanIndex();
 
     return a.exec();
 }
